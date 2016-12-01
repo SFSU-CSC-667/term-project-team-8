@@ -1,0 +1,47 @@
+doctype html
+html
+  head
+    link(rel="stylesheet" href="stylesheet.css")
+
+  body
+    div(class="floatleft")
+      form(method="post" class="rightborder loginseparator")
+        table
+          tr(class="signdescription")
+            th Register 
+          tr 
+            td
+              form Email: 
+            td
+              input(type="email")
+          tr
+            td
+              form Password: 
+            td
+              input(type="password")
+          tr
+            td
+            td(class="rightalign")
+              div
+                button(type="submit") Register
+
+    div(class="floatleft")
+      form(method="post")
+        table
+          tr(class="signdescription")
+            th Login
+          tr
+            td
+              form Email: 
+            td
+              input(type="email")
+          tr
+            td
+              form Password: 
+            td
+              input(type="password")
+          tr
+            td
+            td(class="rightalign")
+              div
+                button(type="submit") Log in
