@@ -1,8 +1,8 @@
 // function that takes in a database to query and returns the result
-function getData(db)
+function getData(db,query)
 {
   const result = new Object();
-  db.any('SELECT * FROM items')
+  db.any(query)
    .then(function (data)
    {
      // res.set('data', data);
