@@ -5,7 +5,7 @@ html
 
   body
     div(class="floatleft")
-      form(method="post" class="rightborder loginseparator")
+      form(action="" method="post" class="rightborder loginseparator")
         table
           tr(class="signdescription")
             th Register 
@@ -13,12 +13,12 @@ html
             td
               form Email: 
             td
-              input(type="email")
+              input(type="email" name="registeremail")
           tr
             td
               form Password: 
             td
-              input(type="password")
+              input(type="password" name="registerpassword")
           tr
             td
             td(class="rightalign")
@@ -26,7 +26,7 @@ html
                 button(type="submit") Register
 
     div(class="floatleft")
-      form(method="post")
+      form(action="" method="post")
         table
           tr(class="signdescription")
             th Login
@@ -34,12 +34,12 @@ html
             td
               form Email: 
             td
-              input(type="email")
+              input(type="email" name="loginemail")
           tr
             td
               form Password: 
             td
-              input(type="password")
+              input(type="password" name="loginpassword")
           tr
             td
             td(class="rightalign")
