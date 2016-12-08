@@ -3,24 +3,22 @@
   "version": "0.0.0",
   "description": "CAH Team 8 Server",
   "engines": {
-     "node": "7.0.0",
-     "npm": "3.10.8"
+    "node": "7.0.0",
+    "npm": "3.10.8"
   },
   "main": "index.js",
   "scripts": {
-    "start": "node ./routes/index.js"
-  },
-  "dependencies": {
-      "express": "4.14.0",
-     "body-parser": "1.15.2" ,
-     "pg-promise": "5.4.7",
-     "pug": "2.0.0-beta6"
-  },
-  "devDependencies": {},
-  "scripts": {
-    "start": "node ./routes/index.js",
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "dependencies": {
+    "body-parser": "1.15.2",
+    "express": "4.14.0",
+    "path": "0.12.7",
+    "pg-promise": "5.4.7",
+    "pug": "2.0.0-beta6"
+  },
+  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "https://git.heroku.com/cahteam8server.git"

@@ -3,13 +3,15 @@ const app = express();
 const port    =   process.env.PORT || 3000;
 const router = express.Router();
 const pug = require('pug');
-const model = require('./model');
+const model = require('./routes/model');
 const bodyParser = require('body-parser');
 
 app.set('view engine','pug');
 const path = require("path");
-app.set('views',path.join("..",'views'));
-app.use(express.static(path.join("..",'public')));
+//console.log(path.join("..",'views'));
+//app.set('views',path.join("..",'views'));
+//app.use(express.static(path.join("..",'public')));
+app.use(express.static('./public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true })); 
 //app.set('db',connect.db);
