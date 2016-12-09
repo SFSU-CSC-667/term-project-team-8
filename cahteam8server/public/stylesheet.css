@@ -1,39 +1,12 @@
-.clearleft {
-  clear: left;
-  padding: 1px;
-} 
-.floatleft {
-  float: left;
-} 
-.inline {
-  display: inline;
-} 
-.inlineblock {
-  display: inline-block;
-} 
-.loginseparator {
-  margin-right: 5px;
-  padding-right: 5px;
-} 
-.rightborder {
-  border-right-style: groove;
-  border-width: 2px;
-} 
-.rightalign {
-  text-align: right;
-} 
-.signdescription {
-  //text-align: left;
-} 
-.vertical {
-  margin-bottom: 0px;
-  margin-left: 0px;
-  margin-right: 0px;
-  padding: 0px;
-  height: 100%;
-  width: 0px;
-} 
-.card {
+.buttonstyle 
+{
+  background-color: #008CBA;
+  border-style: none;
+  height: 40px;
+  width: 100%;
+}
+.card 
+{
   background-color: white;
   border: 1px solid black;
   border-radius: 4px;
@@ -43,4 +16,85 @@
   overflow: hidden;
   text-align: center;
   width: 100px;
+}
+.clearleft 
+{
+  clear: left;
+  padding: 1px;
+} 
+.displayblock 
+{
+  display: block;
+}
+.floatleft 
+{
+  float: left;
+} 
+.formcenter 
+{
+  text-align: center;
+}
+.formhead 
+{
+  font-size: 24px;
+}
+.gameroom 
+{
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 4px;
+  cursor: pointer;
+  height: 140px;
+  margin: 2px;
+  overflow: hidden;
+  text-align: center;
+  width: 140px;
+}
+.inline 
+{
+  display: inline;
+} 
+.inlineblock 
+{
+  display: inline-block;
+} 
+.loginseparator 
+{
+  margin-right: 5px;
+  padding-right: 5px;
+} 
+.paddingttop 
+{
+  margin-bottom: 50px;
+}
+.rightborder 
+{
+  border-right-style: groove;
+  border-width: 2px;
+} 
+.rightalign 
+{
+  text-align: right;
+} 
+.signdescription 
+{
+  //text-align: left;
+} 
+.vertical 
+{
+  margin-bottom: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+  padding: 0px;
+  height: 100%;
+  width: 0px;
+} 
+.widthhalf 
+{
+  margin:auto;
+  width:50%;
+}
+.widthfull 
+{
+  width:100%;
 }
