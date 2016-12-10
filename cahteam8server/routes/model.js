@@ -18,37 +18,43 @@ res.render('hand');
 });
 
 router.get('/lobby',function(req,res,next) {
-res.render('lobby');
-});
-
-router.post('/login',function(req,res)
-{
-   const email = req.body.email;
-   const password = new Buffer(req.body.password).toString('base64');
-   if(email == "")
-     res.redirect('/');
-   else
-   {
-     const query = `select * from player where email = \'${email}\'  AND password = \'${password}\'`;
+  const email = req.query.email;
+  const password = req.query.password;
+  const encryptedPassword = new Buffer(password).toString('base64');
+  console.log(req.query);
+  const query = `select * from player where email = \'${email}\'  AND password = \'${encryptedPassword}\'`;
      console.log(query);
      db.any(query) .then(function(data) {
      if(data.length == 0)
         res.redirect('/');
      else
-        res.redirect('/lobby');
+     {
+       res.render('lobby');
+     }
   })
   .catch(function(error) {
      console.log("ERROR:",error);
      return res.send(error);
   })
- 
-   }
+});
+
+router.post('/login',function(req,res)
+{
+   const email = req.body.email;
+   const password = req.body.password;
+   if(email == "")
+     res.redirect('/');
+   else
+   {
+      res.redirect(`/lobby?email=${email}&password=${password}`);
+  }
 });
 
 router.post('/register',function(req,res)
 {
    const username = req.body.email;
-   const password = new Buffer(req.body.password).toString('base64');
+   const rawPassword = req.body.password;
+   const password = new Buffer(rawPassword).toString('base64');
    const email = req.body.email;
    if(username == "" || password == "" || email =="")
       res.redirect('/');
@@ -63,7 +69,7 @@ router.post('/register',function(req,res)
          console.log(insertQuery);
         db.none(insertQuery,[true])
         .then(function() {
-        res.redirect('/lobby');
+        res.redirect(`/lobby?email=${email}&password=${rawPassword}`);
         })
         .catch(function(error) {
         console.log("ERROR:",error);
