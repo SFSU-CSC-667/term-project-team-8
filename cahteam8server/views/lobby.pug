@@ -21,7 +21,7 @@ html
       div(class="tab-content paddingtop")
         div(class="tab-pane active" id="lobby")
           div(class="row")
-            form(action="/createroom" method="post" class="col-sm-3")
+            form(action="/lobby/createRoom?email=" + email + "&password="+ password method="post" class="col-sm-3")
               div(class="form-group row")
                 label(class="col-sm-12 col-form-label formcenter formhead") Add New Game
               div(class="form-group row")
@@ -94,4 +94,4 @@ html
         div(class="tab-pane" id="rules")
           p game rules
         div(class="tab-pane" id="about")
-          p about page
+          p about

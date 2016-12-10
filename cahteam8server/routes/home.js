@@ -14,7 +14,7 @@ router.get('/hand',function(req,res,next) {
 res.render('hand');
 });
 
-router.post('/login',function(req,res)
+router.post('/login',function(req,res,next)
 {
    const email = req.body.email;
    const password = req.body.password;
@@ -26,7 +26,7 @@ router.post('/login',function(req,res)
   }
 });
 
-router.post('/register',function(req,res)
+router.post('/register',function(req,res,next)
 {
    const username = req.body.email;
    const rawPassword = req.body.password;
@@ -36,14 +36,12 @@ router.post('/register',function(req,res)
    {
       return res.redirect('/');
    }
-   const checkQuery = `select * from player where email = \'${email}\'  OR username = \'${username}\'`;
-   console.log(checkQuery);
-   db.any(checkQuery) .then(function(data) {
+   const checkQuery = `select * from player where email = $1  OR username = $2`;
+   db.any(checkQuery,[email,username]) .then(function(data) {
    if(data.length == 0)
    {
-      const insertQuery = `INSERT INTO player (username,password,email) VALUES (\'${username}\','${password}\',\'${email}\')`;
-      console.log(insertQuery);
-      db.none(insertQuery,[true])
+      const insertQuery = `INSERT INTO player (username,password,email) VALUES ($1,$2,$3)`;
+      db.none(insertQuery,[username,password,email])
         .then(function() {
         return res.redirect(`/lobby?email=${email}&password=${rawPassword}`);
       })
@@ -52,7 +50,10 @@ router.post('/register',function(req,res)
          return res.send(error);
         })
    }
+   else
+   {
      return res.redirect('/');
+   }
   })
   .catch(function(error) {
      console.log("ERROR:",error);
