@@ -3,7 +3,9 @@ const app = express();
 const port    =   process.env.PORT || 3000;
 const router = express.Router();
 const pug = require('pug');
-const model = require('./routes/model');
+const home = require('./routes/home');
+const lobby = require('./routes/lobby');
+const game = require('./routes/game');
 const bodyParser = require('body-parser');
 
 app.set('view engine','pug');
@@ -16,7 +18,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true })); 
 //app.set('db',connect.db);
 app.set('port',port);
-app.use('/',model);
+app.use('/',home);
+app.use('/lobby',lobby);
+app.use('/game',game);
 app.listen(port, function () {
   console.log('cahteamserver8 listening on port',app.get('port'));
 });
