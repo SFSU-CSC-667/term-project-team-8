@@ -13,12 +13,14 @@
   },
   "dependencies": {
     "body-parser": "1.15.2",
+    "cookie-parser": "1.4.3",
     "crypto": "0.0.3",
     "express": "4.14.0",
     "path": "0.12.7",
     "pg-promise": "5.4.7",
     "pug": "2.0.0-beta6",
-    "random-js": "1.0.8"
+    "random-js": "1.0.8",
+    "socket.io": "1.7.2"
   },
   "devDependencies": {},
   "repository": {

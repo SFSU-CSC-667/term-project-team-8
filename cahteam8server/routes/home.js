@@ -20,11 +20,6 @@ function checkNonEmptyFields(req,res,next)
    }
 }
 
-router.use(function timeLog(req, res, next) {
-  console.log('Time: ', Date.now());
-  next();
-});
-
 router.use('/register',checkNonEmptyFields);
 router.use('/login',checkNonEmptyFields);
 

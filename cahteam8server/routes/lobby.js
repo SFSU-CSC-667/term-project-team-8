@@ -7,11 +7,6 @@ const pgp = require('pg-promise')();
 const database = require('../constants/database');
 const db = pgp(database.DATABASE_URL);
 
-router.use(function timeLog(req, res, next) {
-  console.log('Time: ', Date.now());
-  next();
-});
-
 router.use(function authenticateUser(req,res,next) {
    const email = req.query.email;
    const password = req.query.password;
@@ -102,7 +97,7 @@ router.use('/createRoom',function makeRoom(req,res,next){
   const score = parseInt(req.body.score);
   if (score == "" || isNaN(score) || score <= 0)
   {
-    return res.redirect(`/lobby?email=${email}&password=${password}`);
+    return res.redirect(`/lobby?email=${req.query.email}&password=${req.query.password}`);
   }
   const dealerPosition = random.integer(1,4);
   const createGameQuery = `INSERT INTO game(max_score,wait_time,turn_end_time,dealer_id) VALUES($1,$2,$3,$4) RETURNING game_id`;

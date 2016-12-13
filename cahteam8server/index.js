@@ -10,13 +10,9 @@ const bodyParser = require('body-parser');
 
 app.set('view engine','pug');
 const path = require("path");
-//console.log(path.join("..",'views'));
-//app.set('views',path.join("..",'views'));
-//app.use(express.static(path.join("..",'public')));
 app.use(express.static('./public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true })); 
-//app.set('db',connect.db);
 app.set('port',port);
 app.use('/',home);
 app.use('/lobby',lobby);
