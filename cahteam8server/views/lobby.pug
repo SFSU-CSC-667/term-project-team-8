@@ -47,50 +47,11 @@ html
                 th Name 
                 th Score 
             tbody
-              tr
-                td #{leadershipBoard[0].rank}
-                td #{leadershipBoard[0].username}
-                td #{leadershipBoard[0].score}
-              tr
-                td #{leadershipBoard[1].rank}
-                td #{leadershipBoard[1].username}
-                td #{leadershipBoard[1].score}
-              tr
-                td #{leadershipBoard[2].rank}
-                td #{leadershipBoard[2].username}
-                td #{leadershipBoard[2].score}
-              tr
-                td #{leadershipBoard[3].rank}
-                td #{leadershipBoard[3].username}
-                td #{leadershipBoard[3].score}
-              tr
-                td #{leadershipBoard[4].rank}
-                td #{leadershipBoard[4].username}
-                td #{leadershipBoard[4].score}
-              tr
-                td #{leadershipBoard[5].rank}
-                td #{leadershipBoard[5].username}
-                td #{leadershipBoard[5].score}
-              tr
-                td #{leadershipBoard[6].rank}
-                td #{leadershipBoard[6].username}
-                td #{leadershipBoard[6].score}
-              tr
-                td #{leadershipBoard[7].rank}
-                td #{leadershipBoard[7].username}
-                td #{leadershipBoard[7].score}
-              tr
-                td #{leadershipBoard[8].rank}
-                td #{leadershipBoard[8].username}
-                td #{leadershipBoard[8].score}
-              tr
-                td #{leadershipBoard[9].rank}
-                td #{leadershipBoard[9].username}
-                td #{leadershipBoard[9].score}
-              tr
-                td #{leadershipBoard[10].rank}
-                td #{leadershipBoard[10].username}
-                td #{leadershipBoard[10].score}
+              each player in leadershipBoard
+                tr
+                   td #{player.rank}
+                   td #{player.username}
+                   td #{player.score}
         div(class="tab-pane" id="rules")
           p game rules
         div(class="tab-pane" id="about")
