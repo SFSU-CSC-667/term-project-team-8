@@ -36,7 +36,7 @@ CHECK (status >= 0 AND status <= 10)
 DROP TABLE IF EXISTS "whitedeck" CASCADE;
 CREATE TABLE IF NOT EXISTS "whitedeck"(
 wcid SERIAL PRIMARY KEY,
-wcvalue VARCHAR(20) NOT NULL
+wcvalue VARCHAR(150) NOT NULL
 );
 
 DROP TABLE IF EXISTS "blackdeck" CASCADE;
