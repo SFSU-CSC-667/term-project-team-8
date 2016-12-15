@@ -1,5 +1,4 @@
 const express = require('express');
-const crypto = require ('crypto');
 const Random = require('random-js');
 const random = new Random(Random.engines.mt19937().autoSeed());
 const router = express.Router();
@@ -7,15 +6,23 @@ const pgp = require('pg-promise')();
 const database = require('../constants/database');
 const db = pgp(database.DATABASE_URL);
 
-router.use(function authenticateUser(req,res,next) {
-   const email = req.query.email;
-   const password = req.query.password;
-   const encryptedPassword = new Buffer(password).toString('base64');
-   const authenticationQuery = `select * from player where email = $1  AND password = $2`;
-  db.one(authenticationQuery,[email,encryptedPassword])
+router.use(function checkLogin(req,res,next)
+  {
+    if(req.session.passport == undefined)
+       res.redirect('/');
+    else
+    {
+      next();
+    }
+  });
+
+router.use(function getCurrentUser(req,res,next)
+{
+  const currentUserQuery =  `select * from player where email = $1`; 
+ db.oneOrNone(currentUserQuery,[req.session.passport.user])
     .then(function(data) {
     if(data.length == 0)
-     {
+     { 
        return res.redirect('/');
      }
      else
@@ -25,7 +32,6 @@ router.use(function authenticateUser(req,res,next) {
         currentUser.playerId = data.player_id;
         currentUser.username = data.username;
         currentUser.score = data.score;
-        currentUser.rank = "Fill me in";
         res.locals.currentUser = currentUser;
         next();
      }
@@ -97,11 +103,11 @@ router.use('/createRoom',function makeRoom(req,res,next){
   const score = parseInt(req.body.score);
   if (score == "" || isNaN(score) || score <= 0)
   {
-    return res.redirect(`/lobby?email=${req.query.email}&password=${req.query.password}`);
+    return res.redirect(`/lobby`);
   }
   const dealerPosition = random.integer(1,4);
   const createGameQuery = `INSERT INTO game(max_score,wait_time,turn_end_time,dealer_id) VALUES($1,$2,$3,$4) RETURNING game_id`;
-  db.one(createGameQuery,[score,0,0,dealerPosition],game=>game.game_id)
+  db.oneOrNone(createGameQuery,[score,0,0,dealerPosition],game=>game.game_id)
      .then(function(gameId) {
          res.locals.gameId= gameId;
          next();
@@ -115,13 +121,12 @@ router.use('/createRoom',function makeRoom(req,res,next){
 router.post('/createRoom',function(req,res,next) {
   const gameId = res.locals.gameId;
   const playerId = res.locals.playerId;
-  const email = req.query.email;
-  const password = req.query.password;
+  const email = req.session.passport.user;
   const score = parseInt(req.body.score);
   const addPlayerQuery = `INSERT INTO gameplayer(player_id,game_id,player_number) VALUES($1,$2,$3)`;
   db.none(addPlayerQuery,[playerId,gameId,1])
      .then(function () {
-         res.redirect(`/game?email=${email}&password=${password}&gameId=${gameId}`);
+         res.redirect(`/game?gameId=${gameId}`);
      })
      .catch(function(error) {
          console.log("ERROR:",error);

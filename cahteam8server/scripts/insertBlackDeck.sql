@@ -78,7 +78,6 @@ INSERT INTO "blackdeck"( bcvalue) VALUES
 ( 'The CIA now interrogates enemy agents by repeatedly subjecting them to __________.' ),
 ( 'In Rome, there are whisperings that the Vatican has a secret room devoted to __________.' ),
 ( 'Science will never explain the origin of __________.' ),
-( 'When all else fails, I can always masturbate to __________.' ),
 ( 'I learned the hard way that you can`t cheer up a grieving friend with __________.' ),
 ( 'In its new tourism campaign, Detroit proudly proclaims that it has finally eliminated __________.' ),
 ( 'The socialist governments of Scandinavia have declared that access to __________ is a basic human right.' ),

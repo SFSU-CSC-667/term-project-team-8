@@ -4,10 +4,16 @@ const router = express.Router();
 const pgp = require('pg-promise')();
 const database = require('../constants/database');
 const db = pgp(database.DATABASE_URL);
-router.use(function timeLog(req, res, next) {
-  console.log('Time: ', Date.now());
-  next();
-});
+
+router.use(function checkLogin(req,res,next)
+  {
+    if(req.session.passport == undefined)
+       res.redirect('/');
+    else
+    {
+      next();
+    }
+  });
 
 router.get('/',function(req,res,next) {
 res.render('game',{player1:{rank:"1",username:"apatel3",score:"0"},

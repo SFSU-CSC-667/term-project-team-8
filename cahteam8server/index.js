@@ -7,12 +7,23 @@ const home = require('./routes/home');
 const lobby = require('./routes/lobby');
 const game = require('./routes/game');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+const expressSession = require('express-session');
+const passport = require('passport');
+const passportConfig = require('./constants/passportConfig');
+passportConfig.initPassport();
 
-app.set('view engine','pug');
-const path = require("path");
 app.use(express.static('./public'));
+app.set('view engine','pug');
+app.use(cookieParser());
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true })); 
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(expressSession({
+                        secret: 'cardsAgainstHumanity',
+                        resave:false,
+                        saveUninitialized:false}));
+app.use(passport.initialize());
+app.use(passport.session());
 app.set('port',port);
 app.use('/',home);
 app.use('/lobby',lobby);
