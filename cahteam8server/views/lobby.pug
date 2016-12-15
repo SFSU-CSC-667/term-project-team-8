@@ -21,7 +21,7 @@ html
       div(class="tab-content paddingtop")
         div(class="tab-pane active" id="lobby")
           div(class="row")
-            form(action="/lobby/createRoom"  method="post" class="col-sm-3")
+            form(action="/lobby/createGame"  method="post" class="col-sm-3")
               div(class="form-group row")
                 label(class="col-sm-12 col-form-label formcenter formhead") Add New Game
               div(class="form-group row")
@@ -34,10 +34,8 @@ html
 
             div(class="col-sm-6")
               label(class="col-sm-12 col-form-label formhead") Join Game
-              button(class="gameroom inlineblock") Game 1 
-              button(class="gameroom inlineblock") Game 2
-              button(class="gameroom inlineblock") Game 3 
-              button(class="gameroom inlineblock") Game 4
+              each game in games
+                  button(class="gameroom inlineblock"  method = "get" onclick="location.href='/lobby/joinGame?gameId=" + game+ "'") Game #{game}
 
         div(class="col-sm-5 tab-pane" id="leaderboard")
           table(class="table")

@@ -99,7 +99,33 @@ router.use('/',function getCurrentUserRank(req,res,next) {
 
 });
 
-router.use('/createRoom',function makeRoom(req,res,next){
+router.use('/',function getJoinableGames(req,res,next){
+    const joinableGameQuery = "select gameplayer.game_id ,Count(gameplayer.game_id) as numberofplayers FROM gameplayer GROUP BY game_id order by game_id ASC";
+    const games = [];
+    var gameIndex = 0;
+    db.any(joinableGameQuery)
+       .then(function(data) {
+         if(data != null &&  data.length >0)
+         {
+            for(var index = 0; index <data.length; index++)
+            {
+               if(data[index].numberofplayers < 4)
+                {
+                  games[gameIndex] = data[index].game_id;
+                  gameIndex++;
+                }
+            }
+         }
+        res.locals.games = games;
+        next();    
+      })
+      .catch(function(error) {
+             console.log("ERROR:",error);
+             return res.send(error);
+     });
+});
+
+router.post('/createGame',function (req,res,next){
   const score = parseInt(req.body.score);
   if (score == "" || isNaN(score) || score <= 0)
   {
@@ -109,8 +135,7 @@ router.use('/createRoom',function makeRoom(req,res,next){
   const createGameQuery = `INSERT INTO game(max_score,wait_time,turn_end_time,dealer_id) VALUES($1,$2,$3,$4) RETURNING game_id`;
   db.oneOrNone(createGameQuery,[score,0,0,dealerPosition],game=>game.game_id)
      .then(function(gameId) {
-         res.locals.gameId= gameId;
-         next();
+         res.redirect(`/lobby/joinGame?gameId=${gameId}`);
      })
      .catch(function(error) {
              console.log("ERROR:",error);
@@ -118,13 +143,54 @@ router.use('/createRoom',function makeRoom(req,res,next){
      });
  });
 
-router.post('/createRoom',function(req,res,next) {
+router.get('/joinGame',function isValidGame(req,res,next) {
+    const gameId = parseInt(req.query.gameId);
+    if(gameId == undefined || isNaN(gameId) || gameId == "" || gameId < 1)
+       res.redirect('/lobby');
+    else
+    {
+       res.locals.gameId = gameId;
+       const validGameQuery = `select game.game_id,COUNT(gameplayer.game_id) as numberofplayers FROM game left JOIN gameplayer on gameplayer.game_id = $1 where game.game_id = $1 group by game.game_id`;
+       const games = [];
+       var gameIndex = 0;
+       db.oneOrNone(validGameQuery,[gameId])
+         .then(function(data) {
+          const playerNumber = parseInt(data.numberofplayers);
+          if(data != null && playerNumber < 4)
+          {
+             res.locals.playerNumber = playerNumber + 1;
+             next();
+          }
+          else
+             res.redirect(`/lobby`);
+      })
+       .catch(function(error) {
+             console.log("ERROR:",error);
+             return res.send(error);
+        });
+     }
+});
+
+router.get('/joinGame',function alreadyJoinedRoom(req,res,next) {
+    const alreadyMemberOfGameQuery = `select player_id from gameplayer where player_id=$1 AND game_id = $2`;
+    db.oneOrNone(alreadyMemberOfGameQuery,[res.locals.playerId,res.locals.gameId])
+    .then(function (data) {
+         if(data == null || data.length == 0)
+            next();
+         else
+            res.redirect(`/lobby`);
+         })
+         .catch(function(error) {
+            console.log("ERROR:",error);
+            return res.send(error);
+         });
+});
+
+router.get('/joinGame',function(req,res,next) {
   const gameId = res.locals.gameId;
   const playerId = res.locals.playerId;
-  const email = req.session.passport.user;
-  const score = parseInt(req.body.score);
   const addPlayerQuery = `INSERT INTO gameplayer(player_id,game_id,player_number) VALUES($1,$2,$3)`;
-  db.none(addPlayerQuery,[playerId,gameId,1])
+  db.none(addPlayerQuery,[playerId,gameId,res.locals.playerNumber])
      .then(function () {
          res.redirect(`/game?gameId=${gameId}`);
      })
@@ -137,7 +203,7 @@ router.post('/createRoom',function(req,res,next) {
 router.get('/',function(req,res,next) {
   const email = req.query.email;
   const password = req.query.password;
-  res.render('lobby',{email: email,password: password,leadershipBoard:res.locals.leadershipBoard});
+  res.render('lobby',{email: email,password: password,leadershipBoard:res.locals.leadershipBoard,games: res.locals.games});
 });
 
 module.exports = router;
