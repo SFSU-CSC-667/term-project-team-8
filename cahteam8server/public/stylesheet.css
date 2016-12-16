@@ -1,9 +1,33 @@
+.aboutmembers
+{
+  font-size: 20px;
+}
+.aboutteam
+{
+  font-size: 32px;
+}
+.bgstyle
+{
+  background-color: #333333;
+  width:100%;
+}
+.backgroundset
+{
+  background: #cccccc;
+}
+.bottom
+{
+  float: bottom;
+}
+.buttonborder
+{
+  margin: 4px;
+}
 .buttonstyle 
 {
   background-color: #008CBA;
   border-style: none;
   height: 40px;
-  width: 100%;
 }
 .card 
 {
@@ -16,6 +40,10 @@
   overflow: hidden;
   text-align: center;
   width: 100px;
+}
+.center 
+{
+  text-align: center;
 }
 .clearleft 
 {
@@ -50,6 +78,13 @@
   text-align: center;
   width: 140px;
 }
+.image
+{
+  display: block;
+  margin: auto;
+  max-height: 220px;
+  max-width: 220px;
+}
 .inline 
 {
   display: inline;
@@ -74,6 +109,7 @@
 } 
 .rightalign 
 {
+  float: right;
   text-align: right;
 } 
 .signdescription 
@@ -89,6 +125,11 @@
   height: 100%;
   width: 0px;
 } 
+.whitetext 
+{
+  color: white;
+  font-weight: bold;
+}
 .widthhalf 
 {
   margin:auto;

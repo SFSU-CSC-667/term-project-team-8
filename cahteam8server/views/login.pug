@@ -1,43 +1,54 @@
 doctype html
 html
   head
+    link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous")
+    script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js")
+    script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous")
     link(rel="stylesheet" href="stylesheet.css")
 
-  body
-    div(class="floatleft")
-      form(action="/register" method="post" class="rightborder loginseparator")
-        table
-          tr(class="signdescription")
-            th Register 
-          tr 
-            td Email: 
-            td
-              input(type="email" name="email")
-          tr
-            td Password: 
-            td
-              input(type="password" name="password")
-          tr
-            td
-            td(class="rightalign")
-              div
-                button(type="submit") Register
+  body(class="backgroundset")
+    div(class="col-xs-12 center bgstyle whitetext") 
+      label(class="aboutteam") 
+        u CAH - TEAM 8
+    div(class="container")
+      div(class="")          
+        div(class="row")
+          form(action="/register" method="post" class="col-xs-6")
+            div(class="row form-group col-xs-12 formcenter")
+              label(class="formhead") 
+                u Register 
+            div(class="row form-group col-xs-12")
+              div(class="col-xs-3")
+                label(class="col-form-label") Email: 
+              div(class="col-xs-9")
+                input(class="form-control" type="email" name="email")
+            div(class="row form-group col-xs-12")
+              div(class="col-xs-3")
+                label(class="col-form-label") Password:
+              div(class="col-xs-9")
+                input(class="form-control" type="password" name="password")
+            div(class="row form-group col-xs-12")
+              div(class="col-xs-3")
+              button(class="col-xs-6 buttonstyle whitetext" type="submit") Register
+              div(class="col-xs-3")
 
-    div(class="floatleft")
-      form(action="/login" method="post")
-        table
-          tr(class="signdescription")
-            th Login
-          tr
-            td Email: 
-            td
-              input(type="email" name="email")
-          tr
-            td Password: 
-            td
-              input(type="password" name="password")
-          tr
-            td
-            td(class="rightalign")
-              div
-                button(type="submit") Log in
+          form(action="/login" method="post" class="col-xs-6")
+            div(class="row form-group col-xs-12 formcenter")
+              label(class="formhead") 
+                u Login 
+            div(class="row form-group col-xs-12")
+              div(class="col-xs-3")
+                label(class="col-form-label") Email: 
+              div(class="col-xs-9")
+                input(class="form-control" type="email" name="email")
+            div(class="row form-group col-xs-12")
+              div(class="col-xs-3")
+                label(class="col-form-label") Password:
+              div(class="col-xs-9")
+                input(class="form-control" type="password" name="password")
+            div(class="row form-group col-xs-12")
+              div(class="col-xs-3")
+              button(class="col-xs-6 buttonstyle whitetext" type="submit") Log in
+              div(class="col-xs-3")
+
+      img(class="image" src="logo.png")
