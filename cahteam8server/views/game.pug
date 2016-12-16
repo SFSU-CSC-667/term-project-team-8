@@ -17,22 +17,11 @@ html
               th Name 
               th Score 
           tbody
-            tr
-              td #{player1.rank}
-              td #{player1.username}
-              td #{player1.score}
-            tr
-              td #{player2.rank}
-              td #{player2.username}
-              td #{player2.score}
-            tr
-              td #{player3.rank}
-              td #{player3.username}
-              td #{player3.score}
-            tr
-              td #{player4.rank}
-              td #{player4.username}
-              td #{player4.score}
+            each gamePlayer in gamePlayers
+              tr
+                td #{gamePlayer.rank}
+                td #{gamePlayer.username}
+                td #{gamePlayer.score}
         div
           button(class="card floatleft") Card 1 
           button(class="card inlineblock") Card 2

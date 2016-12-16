@@ -21,7 +21,7 @@ router.use(function getCurrentUser(req,res,next)
   const currentUserQuery =  `select * from player where email = $1`; 
  db.oneOrNone(currentUserQuery,[req.session.passport.user])
     .then(function(data) {
-    if(data.length == 0)
+    if(data == null || data.length == 0)
      { 
        return res.redirect('/');
      }
@@ -123,6 +123,11 @@ router.use('/',function getJoinableGames(req,res,next){
              console.log("ERROR:",error);
              return res.send(error);
      });
+});
+
+router.get('/logOut',function(req,res){
+req.logOut();
+res.redirect('/');
 });
 
 router.post('/createGame',function (req,res,next){
