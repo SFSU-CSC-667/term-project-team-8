@@ -84,7 +84,16 @@ html
                 input(id="m" class="form-control chat" autocomplete="off")
               button(class="btn" type="submit") send
 
-    // source: http://socket.io/get-started/chat/
-    script(src="/socket.io/socket.io.js")
-    script(src="http://code.jquery.com/jquery-1.11.1.js")
-    script(src="/javascripts/lobbyChat.js")
+            // source: http://socket.io/get-started/chat/
+            script(src="/socket.io/socket.io.js")
+            script(src="http://code.jquery.com/jquery-1.11.1.js")
+            script().
+            var socket = io();
+            $('form').submit(function(){
+              socket.emit('chat message', $('#m').val());
+              $('#m').val('');
+              return false;
+            });
+            socket.on('chat message', function(msg){
+              $('#chat').append($('<li>').text(msg));
+            });
