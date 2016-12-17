@@ -1,0 +1,17 @@
+div.row
+  form.col-xs-3(action="/lobby/createGame"  method="post")
+    div.form-group.row
+      label.col-xs-12.col-form-label.formcenter.formhead Create New Room
+    div.form-group.row
+      label.col-xs-7.col-form-label Score (3-15)
+      div.col-xs-5
+        input.form-control(type="number" name="score" min="3" max="15" value="3")
+    div
+      div.col-xs-12
+        button.buttonstyle.whitetext.widthfull(type="submit") Create New Room
+
+  div.col-xs-9
+    label.col-xs-12.col-form-label.formhead Join Room
+    each game in games
+      button.gameroom.inlineblock(method="get" onclick="location.href='/lobby/joinGame?gameId=" + game + "'") 
+        b Game #{game}

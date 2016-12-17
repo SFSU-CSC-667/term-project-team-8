@@ -1,0 +1,12 @@
+table.table
+  thead
+    tr
+      th Rank 
+      th Name 
+      th Score 
+  tbody
+    each player in leadershipBoard
+      tr
+         td #{player.rank}
+         td #{player.username}
+         td #{player.score}
