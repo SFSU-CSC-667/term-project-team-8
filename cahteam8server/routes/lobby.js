@@ -2,10 +2,8 @@ const express = require('express');
 const Random = require('random-js');
 const random = new Random(Random.engines.mt19937().autoSeed());
 const router = express.Router();
-const pgp = require('pg-promise')();
-const database = require('../src/constants/database');
-const db = pgp(database.DATABASE_URL);
-
+const {db} = require('../src/constants/database');
+const {LOBBY_CHAT} = require('../src/constants/events');
 router.use(function checkLogin(req,res,next)
   {
     if(req.session.passport == undefined)
@@ -206,7 +204,8 @@ router.get('/joinGame',function(req,res,next) {
 });
 
 router.get('/',function(req,res,next) {
-  res.render('lobby',{email: res.locals.currentUser.email,
+  res.render('lobby',{LOBBY_CHAT:LOBBY_CHAT,
+                      email: res.locals.currentUser.email,
                      password: res.locals.currentUser.password,
                      username:res.locals.currentUser.username,
                      leadershipBoard:res.locals.leadershipBoard,games: res.locals.games});

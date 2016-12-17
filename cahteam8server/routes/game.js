@@ -1,9 +1,7 @@
 const express = require('express');
 const crypto = require ('crypto');
 const router = express.Router();
-const pgp = require('pg-promise')();
-const database = require('../src/constants/database');
-const db = pgp(database.DATABASE_URL);
+const {db} = require('../src/constants/database');
 
 router.use(function checkLogin(req,res,next)
   {

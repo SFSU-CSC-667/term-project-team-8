@@ -1,4 +1,4 @@
-
+const LOBBY_CHAT = document.currentScript.getAttribute('LOBBY_CHAT');
 function addMessage(msg)
 {
    $('#chat').append($('<li>').text(msg));
@@ -7,11 +7,11 @@ function addMessage(msg)
   var socket = io();
   const username = document.currentScript.getAttribute('username') + " : ";
   $('form').submit(function(){
-        socket.emit('chat message',username+ $('#m').val());
+        socket.emit(LOBBY_CHAT,username+ $('#m').val());
         $('#m').val('');
         return false;
   });
-  socket.on('chat message',function(msg)
+  socket.on(LOBBY_CHAT,function(msg)
   {
           addMessage(msg);
   });

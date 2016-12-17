@@ -1,5 +1,5 @@
 const socketIo = require( 'socket.io' );
-
+const {LOBBY_CHAT} = require( '../src/constants/events' );
 const init = ( app, server ) => {
   const io = socketIo(server);
   app.set('io',io);
@@ -10,8 +10,8 @@ const init = ( app, server ) => {
     console.log('user disconnected');
     });
 
-    socket.on('chat message', function(msg){
-    io.emit('chat message',msg);
+    socket.on(LOBBY_CHAT, function(msg){
+    io.emit(LOBBY_CHAT,msg);
       console.log('message: ' + msg);
     });
  

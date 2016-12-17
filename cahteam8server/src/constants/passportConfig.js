@@ -3,9 +3,7 @@ const passportLocal = require('passport-local');
 
 const localStrategy = passportLocal.Strategy;
 
-const pgp = require('pg-promise')();
-const database = require('./database');
-const db = pgp(database.DATABASE_URL);
+const {db} = require('./database');
 
 passport.serializeUser(function(user, done) {
   console.log("Serizalized User " + user);
