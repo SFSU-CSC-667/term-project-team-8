@@ -15,14 +15,6 @@
 {
   background: #cccccc;
 }
-.bar
-{
-  padding: 2px;
-}
-.barstyle
-{
-  border-radius: 4px;
-}
 .bottom
 {
   float: bottom;
@@ -36,7 +28,6 @@
   background-color: #008CBA;
   border-style: none;
   height: 40px;
-  overflow: hidden;
 }
 .card 
 {
@@ -49,14 +40,6 @@
   overflow: hidden;
   text-align: center;
   width: 100px;
-}
-.cardgroup
-{
-  overflow: hidden;
-}
-.cardgroup2
-{
-  overflow: auto;
 }
 .center 
 {
@@ -86,7 +69,7 @@
 .gameroom 
 {
   background-color: white;
-  border: 2px solid black;
+  border: 1px solid black;
   border-radius: 4px;
   cursor: pointer;
   height: 140px;
@@ -115,14 +98,6 @@
   margin-right: 5px;
   padding-right: 5px;
 } 
-.logout
-{
-  //line-height: 20px;
-}
-.nav-pills > li > a
-{
-  color: #AAAAAA;
-}
 .paddingttop 
 {
   margin-bottom: 50px;

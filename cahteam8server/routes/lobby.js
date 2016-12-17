@@ -3,7 +3,7 @@ const Random = require('random-js');
 const random = new Random(Random.engines.mt19937().autoSeed());
 const router = express.Router();
 const pgp = require('pg-promise')();
-const database = require('../constants/database');
+const database = require('../src/constants/database');
 const db = pgp(database.DATABASE_URL);
 
 router.use(function checkLogin(req,res,next)

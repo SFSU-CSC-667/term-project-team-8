@@ -10,7 +10,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const expressSession = require('express-session');
 const passport = require('passport');
-const passportConfig = require('./constants/passportConfig');
+const passportConfig = require('./src/constants/passportConfig');
 passportConfig.initPassport();
 
 app.use(express.static('./public'));
