@@ -5,8 +5,9 @@ function addMessage(msg)
 }
 
   var socket = io();
+  const username = document.currentScript.getAttribute('username') + " : ";
   $('form').submit(function(){
-        socket.emit('chat message', $('#m').val());
+        socket.emit('chat message',username+ $('#m').val());
         $('#m').val('');
         return false;
   });

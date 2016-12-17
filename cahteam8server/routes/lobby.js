@@ -206,9 +206,10 @@ router.get('/joinGame',function(req,res,next) {
 });
 
 router.get('/',function(req,res,next) {
-  const email = req.query.email;
-  const password = req.query.password;
-  res.render('lobby',{email: email,password: password,leadershipBoard:res.locals.leadershipBoard,games: res.locals.games});
+  res.render('lobby',{email: res.locals.currentUser.email,
+                     password: res.locals.currentUser.password,
+                     username:res.locals.currentUser.username,
+                     leadershipBoard:res.locals.leadershipBoard,games: res.locals.games});
 });
 
 module.exports = router;
