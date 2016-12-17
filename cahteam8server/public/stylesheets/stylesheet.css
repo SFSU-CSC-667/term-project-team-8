@@ -1,3 +1,9 @@
+#chat
+{
+  list-style-type: none; 
+  margin: 0; 
+  padding: 0;
+}
 .aboutmembers
 {
   font-size: 20px;
@@ -15,6 +21,14 @@
 {
   background: #cccccc;
 }
+.bar
+{
+  padding: 2px;
+}
+.barstyle
+{
+  border-radius: 4px;
+}
 .bottom
 {
   float: bottom;
@@ -28,6 +42,7 @@
   background-color: #008CBA;
   border-style: none;
   height: 40px;
+  overflow: hidden;
 }
 .card 
 {
@@ -41,9 +56,27 @@
   text-align: center;
   width: 100px;
 }
+.cardgroup
+{
+  overflow: hidden;
+}
+.cardgroup2
+{
+  overflow: auto;
+}
 .center 
 {
   text-align: center;
+}
+.chat
+{
+  //bottom: 50%;
+  //position: fixed;
+  width: 100%;
+}
+.chatwindow
+{
+  border: solid;
 }
 .clearleft 
 {
@@ -69,7 +102,7 @@
 .gameroom 
 {
   background-color: white;
-  border: 1px solid black;
+  border: 2px solid black;
   border-radius: 4px;
   cursor: pointer;
   height: 140px;
@@ -98,6 +131,15 @@
   margin-right: 5px;
   padding-right: 5px;
 } 
+.logout
+{
+  background-color: #8B0000;
+  color: white;
+}
+.nav-pills > li > a
+{
+  color: #AAAAAA;
+}
 .paddingttop 
 {
   margin-bottom: 50px;
