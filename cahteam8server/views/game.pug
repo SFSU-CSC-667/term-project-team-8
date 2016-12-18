@@ -11,15 +11,18 @@ html
     .nav.navbar.navbar-inverse.center.whitetext.widthfull 
 
     .container.widthfull
-      #wait.center
-        .row
-          h1.center Waiting...
-        .row
-          button.btn.btn-danger.buttonstyle(type="button") Action
 
-      #gameview
-        .row
-          .col-sm-9
+      .row
+        .col-sm-9
+          #wait.center
+            .row
+              .col-sm-12
+                .row
+                  h1 Waiting...
+                .row
+                  button.btn.btn-danger.buttonstyle(type="button") Action
+
+          #gameview
             .row
               .col-sm-6
                 .row
@@ -36,9 +39,8 @@ html
             .col-sm-12.row.noborder
               include hand.pug
 
-          .col-sm-3
-            include chat.pug
+        .col-sm-3
+          include chat.pug
 
     script(src="/socket.io/socket.io.js")
-    script(src="/javascripts/lobbyChat.js" username=username)
     script(src="/javascripts/gameRoom.js")
