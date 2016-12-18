@@ -8,9 +8,17 @@
   min-height: 500px;
   overflow-y: scroll;
 }
+#dealer
+{
+  display: none;
+}
 #gameview
 {
-  display:none;
+  display: none;
+}
+#player
+{
+  display: none;
 }
 .aboutmembers
 {
