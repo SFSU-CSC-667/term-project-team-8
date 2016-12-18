@@ -1,0 +1,12 @@
+table.table.cardselect
+  thead
+    tr
+      th Rank 
+      th Name 
+      th Score 
+  tbody
+    each gamePlayer in gamePlayers
+      tr
+        td #{gamePlayer.rank}
+        td #{gamePlayer.username}
+        td #{gamePlayer.score}

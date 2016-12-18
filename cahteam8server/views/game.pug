@@ -1,45 +1,36 @@
 doctype html
 html
   head
+    title Game
     link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous")
     script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js")
     script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous")
     link(rel="stylesheet" href="/stylesheets/stylesheet.css")    
-    link(rel="stylesheet" href="/stylesheets/gamestyle.css")
 
-  body
-    div(class="container grid widthfull")
-      div(class="col-sm-3 row gameleft" id="leaderboard")
-        table(class="table")
-          thead
-            tr
-              th Rank 
-              th Name 
-              th Score 
-          tbody
-            each gamePlayer in gamePlayers
-              tr
-                td #{gamePlayer.rank}
-                td #{gamePlayer.username}
-                td #{gamePlayer.score}
-        div
-          button(class="card floatleft") Card 1 
-          button(class="card inlineblock") Card 2
-        div
-          button(class="card floatleft") Card 3 
-          button(class="card inlineblock") Card 4
-        div
-          button(class="card floatleft") Card 5 
-          button(class="card inlineblock") Card 6
+  body.backgroundset
+    .nav.navbar.navbar-inverse.center.whitetext.widthfull 
 
-      div(class="col-sm-3 row")
-        button(class="col-sm-12 blackcard floatleft") Black Card
-        div(class="col-sm-12")
-          button(class="inlineblock") Submit 
+    .container.widthfull
+      .row
+        .col-sm-9
+          .row
+            .col-sm-6
+              .row
+                .col-sm-12
+                  include gamescore.pug
 
-      div(class="col-sm-12 row gameleft")
-        button(class="card inlineblock") Hand Card 1
-        button(class="card inlineblock") Hand Card 2
-        button(class="card inlineblock") Hand Card 3
+              .row
+                .col-sm-12.cardselect
+                  block cardselect
 
+            .col-sm-6
+              include blackcard.pug
 
+          .col-sm-12.row.noborder
+            include hand.pug
+
+        .col-sm-3
+          include chat.pug
+
+    script(src="/socket.io/socket.io.js")
+    script(src="/javascripts/lobbyChat.js" username=username)

@@ -8,7 +8,7 @@ html
     link(rel="stylesheet" href="stylesheets/stylesheet.css")
 
   body.backgroundset
-    div.col-xs-12.barstyle.bgstyle.borderstyle
+    .col-xs-12.barstyle.bgstyle.borderstyle
       ul.nav.nav-pills.col-xs-12
         li.active
           a(data-toggle="tab" href="#lobby") Home
@@ -21,23 +21,24 @@ html
         li.nav.navbar-right
           a.logout(data-toggle="tab" href="logout" name="logout" onclick="location.href='lobby/logOut'") Log Out
 
-    div.container.widthfull
+    .container.widthfull
 
-      div.row.col-xs-12
-        div.tab-content.paddingtop.col-xs-9
-          div.tab-pane.active#lobby
+      .row.col-xs-12
+        .tab-content.paddingtop.col-xs-9
+          .tab-pane.active#lobby
             include createroom.pug
 
-          div.col-xs-5.tab-pane(id="leaderboard")
+          .col-xs-5.tab-pane(id="leaderboard")
             include leaderboard.pug
 
-          div.tab-pane(id="rules")
+          .tab-pane(id="rules")
             include rules.pug
 
-          div.tab-pane(id="about")
+          .tab-pane(id="about")
             include about.pug
 
-        include chat.pug
+        .col-xs-3
+          include chat.pug
 
       script(src="/socket.io/socket.io.js")
       script(src="/javascripts/lobbyChat.js" username=username LOBBY_CHAT=LOBBY_CHAT)

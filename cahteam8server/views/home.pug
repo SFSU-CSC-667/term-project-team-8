@@ -9,14 +9,12 @@ html
 
   body.backgroundset
 
-    div.col-xs-12.center.bgstyle.whitetext 
-      label.aboutteam 
-        u CAH - Team 8
+    nav.navbar.navbar-inverse.col-xs-12.center.whitetext 
+      label.aboutteam CAH - Team 8
 
-    div.container
-      div 
-        div.row
-          include register.pug
-          include signin.pug
+    .container
+      .row
+        include register.pug
+        include signin.pug
 
       include footer.pug
