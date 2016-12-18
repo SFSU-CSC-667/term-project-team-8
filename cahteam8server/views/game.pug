@@ -11,26 +11,34 @@ html
     .nav.navbar.navbar-inverse.center.whitetext.widthfull 
 
     .container.widthfull
-      .row
-        .col-sm-9
-          .row
-            .col-sm-6
-              .row
-                .col-sm-12
-                  include gamescore.pug
+      #wait.center
+        .row
+          h1.center Waiting...
+        .row
+          button.btn.btn-danger.buttonstyle(type="button") Action
 
-              .row
-                .col-sm-12.cardselect
-                  block cardselect
+      #gameview
+        .row
+          .col-sm-9
+            .row
+              .col-sm-6
+                .row
+                  .col-sm-12
+                    include gamescore.pug
 
-            .col-sm-6
-              include blackcard.pug
+                .row
+                  .col-sm-12.cardselect
+                    block cardselect
 
-          .col-sm-12.row.noborder
-            include hand.pug
+              .col-sm-6
+                include blackcard.pug
 
-        .col-sm-3
-          include chat.pug
+            .col-sm-12.row.noborder
+              include hand.pug
+
+          .col-sm-3
+            include chat.pug
 
     script(src="/socket.io/socket.io.js")
     script(src="/javascripts/lobbyChat.js" username=username)
+    script(src="/javascripts/gameRoom.js")

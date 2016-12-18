@@ -8,6 +8,10 @@
   min-height: 500px;
   overflow-y: scroll;
 }
+#gameview
+{
+  display:none;
+}
 .aboutmembers
 {
   font-size: 20px;
@@ -139,6 +143,10 @@
 {
   padding: 0px;
 }
+.gamecenter
+{
+  vertical-align: middle;
+}
 .gameroom 
 {
   background-color: white;
@@ -184,6 +192,10 @@
 {
   margin: 0px;
   padding: 0px;
+}
+.noshow
+{
+  visibility: hidden;
 }
 .paddingttop 
 {
