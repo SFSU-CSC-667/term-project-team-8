@@ -46,4 +46,4 @@ html
           include chat.pug
 
     script(src="/socket.io/socket.io.js")
-    script(src="/javascripts/gameRoom.js")
+    script(src="/javascripts/gameRoom.js" username=currentUser.username GAME_CHAT=GAME_CHAT JOINED_ROOM = JOINED_ROOM gameId= gameId)

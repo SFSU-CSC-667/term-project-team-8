@@ -2,6 +2,7 @@ const express = require('express');
 const crypto = require ('crypto');
 const router = express.Router();
 const {db} = require('../src/constants/database');
+const {JOINED_GAME,JOINED_ROOM,GAME_CHAT,SUBMITTED_CARDS,JUDGED_CARDS,START_NEW_GAME} = require('../src/constants/events');
 
 router.use(function checkLogin(req,res,next)
   {
@@ -106,6 +107,6 @@ router.get('/',function getPlayers(req,res,next) {
 });
 
 router.get('/',function(req,res,next) {
-res.render('game',{gamePlayers: res.locals.gamePlayers});
+res.render('game',{gameId:res.locals.gameId.toString(),currentUser:res.locals.currentUser,gamePlayers: res.locals.gamePlayers,JOINED_ROOM:JOINED_ROOM,JOINED_GAME:JOINED_GAME,GAME_CHAT:GAME_CHAT,SUBMITTED_CARDS:SUBMITTED_CARDS,JUDGED_CARDS:JUDGED_CARDS,START_NEW_GAME:START_NEW_GAME});
 });
 module.exports = router;
