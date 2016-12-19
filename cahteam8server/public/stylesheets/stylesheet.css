@@ -152,17 +152,9 @@
 {
   float: left;
 } 
-.formcenter 
-{
-  text-align: center;
-}
 .formhead 
 {
   font-size: 24px;
-}
-.gameleft 
-{
-  padding: 0px;
 }
 .gamecenter
 {
@@ -195,6 +187,17 @@
 {
   display: inline-block;
 } 
+.joinroom
+{
+  max-height: 600px;
+  overflow-y: scroll;
+}
+.joinroomwindow
+{
+  background-color: silver;
+  border: 3px solid;
+  padding: 10px;
+}
 .loginseparator 
 {
   margin-right: 5px;
@@ -231,19 +234,6 @@
 {
   float: right;
   text-align: right;
-} 
-.signdescription 
-{
-  //text-align: left;
-} 
-.vertical 
-{
-  margin-bottom: 0px;
-  margin-left: 0px;
-  margin-right: 0px;
-  padding: 0px;
-  height: 100%;
-  width: 0px;
 } 
 .whitetext 
 {
