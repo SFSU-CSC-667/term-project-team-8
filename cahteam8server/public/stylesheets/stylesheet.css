@@ -1,12 +1,6 @@
 #chat
 {
-  list-style-type: none; 
-  margin: 0; 
-  padding: 0;
-  word-wrap: break-word;
-  max-height: 500px;
-  min-height: 500px;
-  overflow-y: scroll;
+  
 }
 #dealer
 {
@@ -119,6 +113,25 @@
   width: 100%;
   padding: 0;
   margin: 0;
+}
+.chatbg
+{
+  background: #D3D3D3;
+  list-style-type: none; 
+  margin: 0; 
+  padding: 0;
+  word-wrap: break-word;
+  max-height: 500px;
+  min-height: 500px;
+  overflow-y: scroll;
+}
+.chatmessages
+{
+  background-color: #808080;
+}
+.chatmessages:nth-child(odd)
+{
+  background-color: #C0C0C0;
 }
 .chatwindow
 {

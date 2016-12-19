@@ -25,16 +25,16 @@ html
 
       .row.col-xs-12
         .tab-content.paddingtop.col-xs-9
-          .tab-pane.active#lobby
+          #lobby.tab-pane.active
             include createroom.pug
 
-          .col-xs-5.tab-pane(id="leaderboard")
+          #leaderboard.col-xs-5.tab-pane
             include leaderboard.pug
 
-          .tab-pane(id="rules")
+          #rules.tab-pane
             include rules.pug
 
-          .tab-pane(id="about")
+          #about.tab-pane
             include about.pug
 
         .col-xs-3
