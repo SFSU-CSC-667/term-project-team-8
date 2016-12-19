@@ -65,7 +65,10 @@ router.get('/',function getPlayers(req,res,next) {
                 {
       
                   if(activePlayers[index].player_id == res.locals.currentUser.playerId)
+                  {
+                     res.locals.currentUser.playerNumber = activePlayers[index].player_number;
                      foundCurrentUser = true;
+                  }
                   gamePlayer.playerId = activePlayers[index].player_id;
                   gamePlayer.username = activePlayers[index].username;
                   gamePlayer.gameId = activePlayers[index].game_id;
