@@ -1,21 +1,23 @@
 .row
   .col-sm-3
-    form(action="/lobby/createGame" method="post")
-      .form-group.row
-        .col-sm-12.center
-          label.col-form-label.formhead Create Room
-      .form-group.row
-        .col-sm-6
-          label.col-form-label Score (3-15)
-        .col-sm-6
-          input.form-control(type="number" name="score" min="3" max="15" value="3")
+    .row
+      .col-sm-12.center
+        label.formhead Create Room
+    .row
       .col-sm-12
-        button.buttonstyle.whitetext.widthfull(type="submit") Create New Room
+        form(action="/lobby/createGame" method="post")
+          .form-group.row
+            .col-sm-6
+              label.col-form-label Score (3-15)
+            .col-sm-6
+              input.form-control(type="number" name="score" min="3" max="15" value="3")
+          .col-sm-12
+            button.buttonstyle.whitetext.widthfull(type="submit") Create New Room
 
   .col-sm-9
-    label.col-sm-12.col-form-label.formhead Join Room
+    label.col-sm-12.formhead Join Room
     .row
-      .col-sm-12.joinroom.joinroomwindow.barstyle
+      .col-sm-12.joinroom.cardwindow.barstyle
           each game in games
             button.gameroom.inlineblock(method="get" onclick="location.href='/lobby/joinGame?gameId=" + game + "'") 
               b Game #{game}

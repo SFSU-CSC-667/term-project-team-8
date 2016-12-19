@@ -1,7 +1,29 @@
 .center
-  h1 
-    b
+  h1
+  .cardwindow.barstyle
+    b.aboutteam
       u Rules
-  p.aboutmembers CAH
 
-  include footer.pug
+    .aboutmembers
+      p Description: Round-based game.
+      p One 
+        em.textblack dealer
+        span . Rest are 
+        em.whitetext players.
+      p 
+        em.whitetext Player
+        span : Submit white card(s) to match black card. 
+      p 
+        em.textblack Dealer
+        span : Decide best white card. Round ends.
+      p 
+        em.whitetext Player 
+        span submitting white card gains a point.
+      p On next turn, the next 
+        em.whitetext player 
+        span becomes the 
+        em.textblack dealer
+        span .
+      p Repeat until max score is reached.
+
+include footer.pug

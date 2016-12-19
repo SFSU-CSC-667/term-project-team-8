@@ -21,9 +21,9 @@ html
         li.nav.navbar-right
           a.logout(data-toggle="tab" href="logout" name="logout" onclick="location.href='lobby/logOut'") Log Out
 
-    .container.widthfull
+    .container.widthfull.noborder
 
-      .row.col-sm-12
+      .row.col-sm-12.noborder
         .tab-content.paddingtop.col-sm-9
           #lobby.tab-pane.active
             include rooms.pug
@@ -34,7 +34,7 @@ html
               .col-sm-8
                 include leaderboard.pug
 
-          #rules.col-sm-12.tab-pane
+          #rules.col-sm-12.tab-pane.noborder
             include rules.pug
 
           #about.tab-pane

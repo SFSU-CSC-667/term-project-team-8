@@ -67,9 +67,14 @@
 .buttonstyle 
 {
   background-color: #008CBA;
+  border-radius: 2px;
   border-style: none;
   height: 40px;
   overflow: hidden;
+}
+.buttonstyle:hover
+{
+  background-color: #0099cc;
 }
 .card 
 {
@@ -105,6 +110,13 @@
 .cardselect
 {
   width: 300px;
+}
+.cardwindow
+{
+  background-color: silver;
+  border: 3px solid;
+  margin: 2px;
+  padding: 10px;
 }
 .center 
 {
@@ -142,12 +154,17 @@
   border: solid;
   background-color: #333333;
   //width: 240px;
+  max-width: 300px;
 }
 .clearleft 
 {
   clear: left;
   padding: 1px;
 } 
+.color1
+{
+  color: #008000;
+}
 .displayblock 
 {
   display: block;
@@ -202,14 +219,8 @@
 } 
 .joinroom
 {
-  max-height: 600px;
+  max-height: 580px;
   overflow-y: scroll;
-}
-.joinroomwindow
-{
-  background-color: silver;
-  border: 3px solid;
-  padding: 10px;
 }
 .logout
 {
@@ -254,6 +265,11 @@
 .table>tbody>tr.leaderboard>td
 {
   padding: 6px;
+}
+.textblack
+{
+  color: black;
+  font-weight: bold;
 }
 .whitetext 
 {
