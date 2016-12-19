@@ -8,7 +8,7 @@ html
     link(rel="stylesheet" href="/stylesheets/stylesheet.css")    
 
   body.backgroundset
-    .nav.navbar.navbar-inverse.center.whitetext.widthfull 
+    .nav.navbar.navbar-inverse.center.whitetext.widthfull.noborderradius 
 
     .container.widthfull
 
@@ -31,16 +31,17 @@ html
 
                 .row
                   .col-sm-12.cardselect
-                    #player
-                      include player.pug
+                    //#player
+                    include player.pug
                     #dealer
                       include dealer.pug
 
               .col-sm-6
                 include blackcard.pug
 
-            .col-sm-12.row.noborder
-              include hand.pug
+            .row
+              .col-sm-12
+                include hand.pug
 
         .col-sm-3
           include chat.pug

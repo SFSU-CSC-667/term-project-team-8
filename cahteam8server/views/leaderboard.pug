@@ -6,7 +6,9 @@ table.table
       th Score 
   tbody
     each player in leadershipBoard
-      tr
+      tr.leaderboard
          td #{player.rank}
          td #{player.username}
          td #{player.score}
+
+include footer.pug

@@ -8,8 +8,8 @@ html
     link(rel="stylesheet" href="stylesheets/stylesheet.css")
 
   body.backgroundset
-    .col-xs-12.barstyle.bgstyle.borderstyle
-      ul.nav.nav-pills.col-xs-12
+    .col-sm-12.barstyle.bgstyle.borderstyle.noborderradius
+      ul.nav.nav-pills.col-sm-12
         li.active
           a(data-toggle="tab" href="#lobby") Home
         li
@@ -23,21 +23,24 @@ html
 
     .container.widthfull
 
-      .row.col-xs-12
-        .tab-content.paddingtop.col-xs-9
+      .row.col-sm-12
+        .tab-content.paddingtop.col-sm-9
           #lobby.tab-pane.active
-            include createroom.pug
+            include rooms.pug
 
-          #leaderboard.col-xs-5.tab-pane
-            include leaderboard.pug
+          #leaderboard.col-sm-12.tab-pane
+            .row
+              .col-sm-2
+              .col-sm-8
+                include leaderboard.pug
 
-          #rules.tab-pane
+          #rules.col-sm-12.tab-pane
             include rules.pug
 
           #about.tab-pane
             include about.pug
 
-        .col-xs-3
+        .col-sm-3
           include chat.pug
 
       script(src="/socket.io/socket.io.js")

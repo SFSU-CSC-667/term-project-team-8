@@ -20,7 +20,7 @@
 }
 .aboutteam
 {
-  font-size: 32px;
+  font-size: 30px;
 }
 .backgroundset
 {
@@ -62,7 +62,7 @@
 }
 .buttonborder
 {
-  margin: 4px;
+  margin: 3px;
 }
 .buttonstyle 
 {
@@ -151,6 +151,11 @@
 .floatleft 
 {
   float: left;
+}
+.footerimage
+{
+  background-image: url("/images/logo.png");
+  background-position: center bottom;
 } 
 .formhead 
 {
@@ -198,15 +203,14 @@
   border: 3px solid;
   padding: 10px;
 }
-.loginseparator 
-{
-  margin-right: 5px;
-  padding-right: 5px;
-} 
 .logout
 {
   background-color: #8B0000;
   color: white;
+}
+.nav-pills 
+{
+  border-radius: none;
 }
 .nav-pills > li > a
 {
@@ -216,6 +220,10 @@
 {
   margin: 0px;
   padding: 0px;
+}
+.noborderradius
+{
+  border-radius: 0;
 }
 .noshow
 {
@@ -235,6 +243,10 @@
   float: right;
   text-align: right;
 } 
+.table>tbody>tr.leaderboard>td
+{
+  padding: 6px;
+}
 .whitetext 
 {
   color: white;
