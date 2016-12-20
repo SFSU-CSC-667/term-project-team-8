@@ -4,6 +4,7 @@ const JOINED_GAME = document.currentScript.getAttribute('JOINED_GAME');
 const SUBMITTED_CARDS = document.currentScript.getAttribute('SUBMITTED_CARDS');
 const JUDGED_CARDS = document.currentScript.getAttribute('JUDGED_CARDS');
 const START_NEW_GAME = document.currentScript.getAttribute('START_NEW_GAME');
+const NUM_PLAYERS = 4;
 
 const playerId = document.currentScript.getAttribute('playerId');
 const playerNumber = document.currentScript.getAttribute('playerNumber');
@@ -19,15 +20,14 @@ const roomInfo = new Object();
 roomInfo.gameId= gameId;
 roomInfo.msg=username + " has joined game " + gameId;
 
-var timesReached = 0;
+var usersSubmitted = 0;
+var usersInRoom = 0;
 var userCount = 0;
 var pressedButton = false;
+
 var selectedCardValue = "none";
 var startedGame = false;
-
 socket.emit(JOINED_ROOM,roomInfo);
-
-var usersInRoom = 0;
 
 $('#chatForm').submit(function(){
         const message = new Object();
@@ -57,23 +57,34 @@ $('#chatForm').submit(function(){
      }
   });
 
+
   socket.on(START_NEW_GAME,function(message)
   {
     if(message.playerId === playerId)
     {
        $('#wait').hide();
        $('#gameview').show();
-       $('#player').show();
-       $('#dealer').hide();
        for(var i = 1; i<11; i++)
        {
           const handCard = '#hand' + String(i);
           $(handCard).text(message.hand[(i-1)]);
        }
     }
-    const blackCard = message.blackCard;
-    if(blackCard !=undefined && blackCard != "")
-       $('#phrase').txt(blackCard);
+   const dealerId = message.dealerId;
+   const blackCard = message.blackCard; 
+   if(blackCard.length > 0)
+       $('#phrase').text(blackCard);
+   if(message.dealerId.toString() === playerNumber.toString())
+   {
+       $('#dealer').show();
+       $('#player').hide();
+   }
+   else
+   {
+       $('#player').show();
+       $('#dealer').hide();
+   }
+
   });
 
   socket.on(GAME_CHAT,function(message)
@@ -81,15 +92,42 @@ $('#chatForm').submit(function(){
       addMessage(message.msg);
   });
 
+  socket.on(SUBMITTED_CARDS,function(message)
+  {
+     usersSubmitted++;
+     if(message.playerId == playerId)
+     {
+       for(var i = 1; i<11; i++)
+       {  
+          const handCard = '#hand' + String(i);
+          $(handCard).text(message.hand[(i-1)]);
+       }
+
+     }
+  });
+
 $(document).ready(function ()
 {
    function selectCard(event)
    {
-     $(this).text("good");
-   }
+     selectedCardValue = $(this).text();
+     $('#submit1').text(selectedCardValue);
+     return false;
+  }
+
+  $('#submitcard').click(function (event) {
+      if(selectedCardValue == "")
+         return false;
+     const message = new Object();
+     message.gameId = gameId;
+     message.playerId = playerId;
+     message.playerNumber = playerNumber;
+     message.selectedCard = selectedCardValue;
+     socket.emit(SUBMITTED_CARDS,message);
+   });
  
   $('#wait button').click(function (event) {
-    if(usersInRoom < 2 || pressedButton == true)
+    if(usersInRoom < NUM_PLAYERS || pressedButton == true)
         return false;
     const message = new Object();
     message.gameId = gameId.toString();

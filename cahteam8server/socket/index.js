@@ -24,12 +24,61 @@ const init = ( app, server ) => {
    }); 
    
    socket.on(START_NEW_GAME,dealHand);
- 
+   socket.on(SUBMITTED_CARDS,updateHand); 
+
+
    socket.on(GAME_CHAT, function(message){
    
     io.sockets.in(message.gameId).emit(GAME_CHAT,message);
       console.log('game message: ' + message.msg);
     });
+
+   function updateHand(message)
+   {
+      const updateWhiteCardQuery = "update whitecards set status = $1 where game_id = $3 and wcvalue = $4";  
+      db.none(updateWhiteCardQuery,1,parseInt(message.gameId),message.selectedCard).then(function()
+      {
+        getNewCard(message);
+      })
+     .catch(function (error)
+     {
+          console.log("Caught the problem. at markHand");
+          console.log("ERROR:",error);
+     });
+   }
+
+   function getNewCard(message)
+   {
+       const getAvailableWhiteCardsQuery = "select whitedeck.wcid,whitedeck.wcvalue from whitedeck inner join whitecards on whitecards.wcid = whitedeck.wcid where game_id = $1 and status = $2  limit 1";
+       db.oneOrNone(getAvailableWhiteCardQuery,parseInt(message.gameId))
+       .then(function(data)
+       {
+           message.whiteCardId = data.wcid;
+           message.hand = [];
+           message.whiteCardValue = data.wcvalue;
+           updateNewCard(message);
+       })
+     .catch(function (error)
+     {
+          console.log("Caught the problem. at markHand");
+          console.log("ERROR:",error);
+     });
+   }
+
+function updateNewCard(message)
+   {
+      const updateWhiteCardQuery = "update whitecards set status = $1 where game_id = $2 and wcid = $3";
+      db.none(updateWhiteCardQuery,[1,parseInt(message.gameId),message.whiteCardId]).then(function()
+      {
+       
+      })
+     .catch(function (error)
+     {
+          console.log("Caught the problem. at markHand");
+          console.log("ERROR:",error);
+     });
+   }
+
 
    function dealHand(message)
    {
@@ -46,8 +95,19 @@ const init = ( app, server ) => {
           }
           message.hand = hand;
           message.whiteCardIds = whiteCardIds;
-          markHand(message);
-      })
+          const updateWhiteCardsQuery = "update whitecards set status = $1 ,player_id = $2 where game_id = $3 and wcid= $4";
+          for(var i = 0; i < 10; i++)
+          {
+            db.none(updateWhiteCardsQuery,[1,message.playerId,parseInt(message.gameId),message.whiteCardIds[i]]).
+            then(function (){})
+            .catch(function (error)
+            {  
+              console.log("Caught the problem. at markHand");
+              console.log("ERROR:",error);
+            });
+          }
+          getGameInfo(message);
+       })
       .catch(function(error)
       {
          console.log("Beginning marks the spot.");
@@ -55,44 +115,33 @@ const init = ( app, server ) => {
       });
    }
 
-   function markHand(message)
+   function getGameInfo(message)
    {
-      for(var i = 0; i < 10; i++)
-      {
-         const updateWhiteCardsQuery = "update whitecards set status = $1 ,player_id = $2 where game_id = $3 and wcid= $4";
-         db.none(updateWhiteCardsQuery,[1,message.playerId,parseInt(message.gameId),message.whiteCardIds[i]]).
-         then(function () {})
-         .catch(function(error)
-         {
-            console.log("Caught the problem. at markHand");
-            console.log("ERROR:",error);
-         });
-      }
-      message.dealerId = 0;
-      message.blackCard="";
-      const gameInfo = getGameInfo(message);
-      console.log("Game Info: %j",gameInfo);
-      message.dealerId = gameInfo.dealerId;
-      message.maxScore = gameInfo.maxScore;
-      if(message.dealerId.toString() === message.playerNumber.toString())
+      db.one("select * from game where game_id = $1 limit 1",[parseInt(message.gameId)] )
+      .then( data => {
+        message.dealerId = data.dealer_id;
+        message.maxScore = data.max_score;
+        message.blackCard = "";
+        if(message.dealerId.toString() != message.playerNumber.toString())
+          io.sockets.in(message.gameId).emit(START_NEW_GAME,message);
+        else
+          dealInitialBlackCard(message);
+     })
+     .catch(function(error)
        {
-          const blackCard = dealBlackCard(message);
-          message.blackCard = blackCard.blackCard;
-          message.blackCardId = blackCard.bcid;
-       }
-       console.log("%j",message);
-       io.sockets.in(message.gameId).emit(START_NEW_GAME,message);
-       //socket.broadcast.to(message.gameId.toString()).emit(START_NEW_GAME,message);
-   }
+          console.log("ERROR:", error);
+       });
+   };
 
-   function dealBlackCard(message)
-   {  
+
+   function dealInitialBlackCard(message)
+   {
       const getBlackCardQuery = "select blackdeck.bcid,blackdeck.bcvalue from blackdeck inner join blackcards on blackcards.bcid = blackdeck.bcid where game_id = $1 and status = $2 limit 1";
-      db.one(getBlackCardQuery,[message.gameId,0]).
+      db.one(getBlackCardQuery,[parseInt(message.gameId),0]).
       then(function (blackCard) {
           message.blackCard = blackCard.bcvalue;
           message.blackCardId = blackCard.bcid;
-         return  markBlackCard(message);
+          markInitialBlackCard(message);
       })
       .catch(function(error)
       {
@@ -100,46 +149,19 @@ const init = ( app, server ) => {
       });
    }
 
-   function markBlackCard(message)
+   function markInitialBlackCard(message)
    {
-      const blackCard = new Object();
-      blackCard.blackCard = message.blackCard;
-      blackCard.blackCardId = message.blackCardId;
       const updateBlackCardQuery = "update blackcards set status = $1, player_id = $2 where game_id = $3 and bcid = $4";
          db.none(updateBlackCardQuery,[1,message.playerId,parseInt(message.gameId),message.blackCardId]).
-         then(function () {})
-         .catch(function(error)
-         {
-            console.log("ERROR:",error);
-         });
-      return blackCard;
-   }
-
-   function getGameInfo(message)
-   {
-       const gameQuery = "select * from game where game_id = $1 limit 1";
-       const gameId = parseInt(message.gameId);
-       console.log("gameId = " + String(gameId));
-       const gameInfo = []
-       gameInfo.dealerId = 0;
-       gameInfo.maxScore = 0;
-       db.one(gameQuery,[gameId]).
-         then(function (data)
-         {
-            gameInfo.dealerId = data.dealer_id;
-            gameInfo.maxScore = data.max_score;
-            return gameInfo;
-            //onsole.log("message.dealerId is  ", message.dealerId);
+         then(function ()
+           {
+             io.sockets.in(message.gameId).emit(START_NEW_GAME,message);
          })
          .catch(function(error)
          {
-            console.log("Why the heck");
             console.log("ERROR:",error);
-            return gameInfo;
          });
-         return gameInfo;
-        //console.log(message.dealerId);
-   };
+   }
 
    function getUserCount(roomInfo)
    {
